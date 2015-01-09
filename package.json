@@ -1,0 +1,24 @@
+{
+  "name": "medisas",
+  "version": "1.0.0",
+  "description": "Use Twitter's sample streaming API to show the top 10 retweeted tweets (note the retweeted_status field) in a rolling window of time, where the window's start is n minutes ago (where n is defined by the user) and the window's end is the current time.  Output should continuously update and include the tweet text and number of times retweeted in the current rolling window. You should not use the retweet_count field, but instead count the retweets that your program actually processes.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thewillhuang/medisas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thewillhuang/medisas/issues"
+  },
+  "homepage": "https://github.com/thewillhuang/medisas",
+  "dependencies": {
+    "moment": "^2.9.0",
+    "node-tweet-stream": "^1.6.0",
+    "underscore": "^1.7.0"
+  }
+}

@@ -35,26 +35,34 @@ t.on('error', function (err) {
 t.track('all');
 
 var logTopTenText = function() {
+  //resets top10 so it rebuilds on each run of the function
   var top = 0;
   var topten = [];
+
+  //identify the proper time ranges to build the top 10
+  //with the help of a filter function to disgard time ranges that does not apply
   keyArray = Object.keys(tempObj);
   windowArray = _.filter(keyArray, function(num) {
     if (num >= Date.now() - rollingWindowInMs) {
       return num;
     }
   });
+
+  //build top10
   for (var i = 0; i < windowArray.length; i++) {
     if (tempObj[windowArray[i]].count > top) {
       topten.push({
         text: tempObj[windowArray[i]].text,
         count: tempObj[windowArray[i]].count
       });
+      top = topten[topten.length - 1].count;
     }
-    top = topten[topten.length - 1].count;
   }
-  if (topten.length > 10) {
-    topten.shift();
-  }
+  //removes elemnts from top10 when the list is greater then 10
+  // if (topten.length > 10) {
+  //   topten.shift();
+  // }
+
   console.log('key Array Length', keyArray.length);
   console.log('window Array Length', windowArray.length);
   console.log('top number', top);

@@ -48,14 +48,11 @@ var logTopTenText = function() {
     }
   });
 
-  //build top10
+  //builds top10 array
   for (var i = 0; i < windowArray.length - 1; i++) {
     if (tempObj[windowArray[i]].count > top) {
-      topten.push({
-        text: tempObj[windowArray[i]].text,
-        count: tempObj[windowArray[i]].count
-      });
-      top = topten[topten.length - 1].count;
+      topten.push(tempObj[windowArray[i]]);
+      top = tempObj[windowArray[i]].count;
     }
   }
   //removes elemnts from top10 when the list is greater then 10

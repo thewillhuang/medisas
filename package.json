@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/thewillhuang/medisas",
   "dependencies": {
+    "lodash": "^2.4.1",
     "moment": "^2.9.0",
     "node-tweet-stream": "^1.6.0",
     "underscore": "^1.7.0"

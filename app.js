@@ -10,7 +10,7 @@ var t = new Twitter({
 
 
 //user defined variables
-var rollingWindowInMin = 1;
+var rollingWindowInMin = 20;
 var refreshRateInMs = 100;
 var rollingWindowInMs = rollingWindowInMin * 1000 * 60;
 
@@ -72,6 +72,7 @@ var logTopTenText = function() {
   topTen.length = 10;
   console.log('keyArray', keyArray.length);
   console.log('windowArray',windowArray.length);
+  console.log('window time frame', rollingWindowInMin);
   console.log(topTen);
   console.log('===========================================', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 };

@@ -11,7 +11,7 @@ var t = new Twitter({
 
 //user defined variables
 var rollingWindowInMin = 1;
-var refreshRateInMs = 1000;
+var refreshRateInMs = 100;
 var rollingWindowInMs = rollingWindowInMin * 1000 * 60;
 
 t.on('tweet', function (tweet) {
@@ -62,12 +62,16 @@ var logTopTenText = function() {
     mapText.push(map[mapKey[j]]);
   }
   for (var k = 0; k < mapKey.length; k++) {
-    if (topTen[topTen.length - 1].text !== mapText[k]) {
+    if (topTen[topTen.length - 1].text === mapText[k]) {
+      topTen[topTen.length -1] = {text:mapText[k],count:mapKey[k]};
+    } else {
       topTen.push({text:mapText[k],count:mapKey[k]});
     }
   }
   topTen.reverse();
   topTen.length = 10;
+  console.log('keyArray', keyArray.length);
+  console.log('windowArray',windowArray.length);
   console.log(topTen);
   console.log('===========================================', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 };

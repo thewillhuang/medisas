@@ -50,7 +50,7 @@ var logTopTenText = function() {
     }
   });
 
-  //rebuilds top10 array given a key index of time range and a tempObject with object text and count in it.
+  //rebuilds top10 array
   for (var i = 0; i < windowArray.length - 1; i++) {
     var tempObjCount = tempObj[windowArray[i]].count;
     var tempObjText = tempObj[windowArray[i]].text;

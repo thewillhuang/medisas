@@ -51,9 +51,9 @@ var logTopTenText = function() {
       });
     }
     top = topten[topten.length - 1].count;
-    if (topten.length > 10) {
-      topten.shift();
-    }
+  }
+  if (topten.length > 10) {
+    topten.shift();
   }
   console.log('key Array Length', keyArray.length);
   console.log('window Array Length', windowArray.length);

@@ -32,8 +32,8 @@ var logTopTen = function() {
     console.log('text', tempObj[keyArray[i]]);
     console.log('retweets', keyArray[i]);
   }
-  console.log('===========================================');
+  console.log('===========================================', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 };
 
 var logEverySec = setInterval(logTopTen, refreshRateInMs);
-
+var reset = setTimeout(tempObj = {}, rollingWindowInMin*1000*60);

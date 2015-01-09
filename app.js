@@ -15,7 +15,7 @@ t.on('tweet', function (tweet) {
     var tweetText = tweet.retweeted_status.text;
     var retweetCount = tweet.retweeted_status.retweet_count;
     tempObj[retweetCount] = tweetText;
-    logTopTen(tempObj);
+    // logTopTen(tempObj);
   }
 });
 
@@ -26,13 +26,14 @@ t.on('error', function (err) {
 t.track('all');
 
 
-var logTopTen = function(obj) {
-  var keyArray = Object.keys(obj);
+var logTopTen = function() {
+  var keyArray = Object.keys(tempObj);
   for (var i = keyArray.length - 1; i >= keyArray.length - 11; i--) {
-    console.log('text', obj[keyArray[i]]);
+    console.log('text', tempObj[keyArray[i]]);
     console.log('retweets', keyArray[i]);
   }
   console.log('===========================================');
 };
 
-var logEverySec = setInterval(logTopTen(tempObj), refreshRateInMs);
+var logEverySec = setInterval(logTopTen, refreshRateInMs);
+

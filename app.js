@@ -21,6 +21,7 @@ t.on('tweet', function (tweet) {
   if (tweet.retweeted_status !== undefined) {
     var tweetText = tweet.retweeted_status.text;
     var retweetCount = tweet.retweeted_status.retweet_count;
+    //builds the temp object to store all tweets and their count from the start
     tempObj[Date.now()] = {
       text: tweetText,
       count: retweetCount
@@ -36,7 +37,6 @@ t.track('all');
 
 var logTopTenText = function() {
   //resets top10 so it rebuilds on each run of the function
-  var top = 0;
   var topten = [];
 
   //identify the proper time ranges to build the top 10
@@ -48,9 +48,12 @@ var logTopTenText = function() {
     }
   });
 
-  //rebuilds top10 array
+  var top = 0;
+  //rebuilds top10 array given a key index of time range and a tempObject with object text and count in it.
   for (var i = 0; i < windowArray.length - 1; i++) {
-    if (tempObj[windowArray[i]].count > top) {
+    var temoObjCount = tempObj[windowArray[i]].count;
+    var temoObjText = tempObj[windowArray[i]].text;
+    if (temoObjCount > top) {
       topten.push(tempObj[windowArray[i]]);
       top = tempObj[windowArray[i]].count;
     }

@@ -16,7 +16,7 @@ var top = 0;
 //user defined variables
 var rollingWindowInMin = 1;
 var refreshRateInMs = 1000;
-var rollingWindowInMs = rollingWindowInMin * 1000 * 6;
+var rollingWindowInMs = rollingWindowInMin * 1000 * 60;
 
 t.on('tweet', function (tweet) {
   if (tweet.retweeted_status !== undefined) {

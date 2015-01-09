@@ -1,5 +1,5 @@
-var moment = require('moment');
 var _ = require('lodash');
+var moment = require('moment');
 var Twitter = require('node-tweet-stream');
 var t = new Twitter({
   consumer_key: '8AqQCy7umStCyNN356v7fw',
@@ -8,9 +8,6 @@ var t = new Twitter({
   token_secret: 'elXVYJRFmFFit3PiVTmI9eU0IvHqqD7H4yeEmClJ8c'
 });
 
-var tempObj = {};
-var keyArray;
-var windowArray;
 
 //user defined variables
 var rollingWindowInMin = 1;
@@ -35,9 +32,14 @@ t.on('error', function (err) {
 
 t.track('all');
 
+var tempObj = {};
+var keyArray;
+var windowArray;
+
 var logTopTenText = function() {
   //resets top10 so it rebuilds on each run of the function
-  var topten = [];
+  var topTen = [{text:'',count:0}];
+  var map = {};
 
   //identify the proper time ranges to build the top 10
   //with the help of a filter function to disgard time ranges that does not apply
@@ -48,26 +50,25 @@ var logTopTenText = function() {
     }
   });
 
-  var top = 0;
   //rebuilds top10 array given a key index of time range and a tempObject with object text and count in it.
   for (var i = 0; i < windowArray.length - 1; i++) {
-    var temoObjCount = tempObj[windowArray[i]].count;
-    var temoObjText = tempObj[windowArray[i]].text;
-    if (temoObjCount > top) {
-      topten.push(tempObj[windowArray[i]]);
-      top = tempObj[windowArray[i]].count;
-    }
-    // removes elemnts from top10 when the list is greater then 10
-    if (topten.length > 10) {
-      topten.shift();
+    var tempObjCount = tempObj[windowArray[i]].count;
+    var tempObjText = tempObj[windowArray[i]].text;
+    map[tempObjCount] = tempObjText;
+  }
+  var mapKey = Object.keys(map);
+  var mapText = [];
+  for (var j = 0; j < mapKey.length; j++) {
+    mapText.push(map[mapKey[j]]);
+  }
+  for (var k = 0; k < mapKey.length; k++) {
+    if (topTen[topTen.length - 1].text !== mapText[k]) {
+      topTen.push({text:mapText[k],count:mapKey[k]});
     }
   }
-
-  console.log('key Array Length', keyArray.length);
-  console.log('window Array Length', windowArray.length);
-  console.log('top number', top);
-  console.log(topten.length);
-  console.log(topten);
+  topTen.reverse();
+  topTen.length = 10;
+  console.log(topTen);
   console.log('===========================================', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 };
 

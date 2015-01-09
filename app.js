@@ -9,8 +9,8 @@ var t = new Twitter({
 });
 
 var tempObj = {};
-var keyArray = [];
-var windowArray = [];
+var keyArray;
+var windowArray;
 
 //user defined variables
 var rollingWindowInMin = 1;
@@ -48,17 +48,17 @@ var logTopTenText = function() {
     }
   });
 
-  //builds top10 array
+  //rebuilds top10 array
   for (var i = 0; i < windowArray.length - 1; i++) {
     if (tempObj[windowArray[i]].count > top) {
       topten.push(tempObj[windowArray[i]]);
       top = tempObj[windowArray[i]].count;
     }
+    // removes elemnts from top10 when the list is greater then 10
+    if (topten.length > 10) {
+      topten.shift();
+    }
   }
-  //removes elemnts from top10 when the list is greater then 10
-  // if (topten.length > 10) {
-  //   topten.shift();
-  // }
 
   console.log('key Array Length', keyArray.length);
   console.log('window Array Length', windowArray.length);

@@ -49,7 +49,7 @@ var logTopTenText = function() {
   });
 
   //build top10
-  for (var i = 0; i < windowArray.length; i++) {
+  for (var i = 0; i < windowArray.length - 1; i++) {
     if (tempObj[windowArray[i]].count > top) {
       topten.push({
         text: tempObj[windowArray[i]].text,

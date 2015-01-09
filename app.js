@@ -7,11 +7,10 @@ var t = new Twitter({
   token: '29463499-9Og6hxW4HqFxcQyIrAdmLpbAnrwIk290ghOE0ez5f',
   token_secret: 'elXVYJRFmFFit3PiVTmI9eU0IvHqqD7H4yeEmClJ8c'
 });
+
 var tempObj = {};
-var topten = [];
 var keyArray = [];
 var windowArray = [];
-var top = 0;
 
 //user defined variables
 var rollingWindowInMin = 1;
@@ -36,6 +35,8 @@ t.on('error', function (err) {
 t.track('all');
 
 var logTopTenText = function() {
+  var top = 0;
+  var topten = [];
   keyArray = Object.keys(tempObj);
   windowArray = _.filter(keyArray, function(num) {
     if (num >= Date.now() - rollingWindowInMs) {
@@ -50,13 +51,14 @@ var logTopTenText = function() {
       });
     }
     top = topten[topten.length - 1].count;
-    if (topten.length >= 10) {
+    if (topten.length > 10) {
       topten.shift();
     }
   }
   console.log('key Array Length', keyArray.length);
   console.log('window Array Length', windowArray.length);
   console.log('top number', top);
+  console.log(topten.length);
   console.log(topten);
   console.log('===========================================', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 };

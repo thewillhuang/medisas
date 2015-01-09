@@ -9,6 +9,8 @@ var t = new Twitter({
 });
 var tempObj = {};
 var topten = [];
+var keyArray = [];
+var windowArray = [];
 var top = 0;
 
 //user defined variables
@@ -34,8 +36,8 @@ t.on('error', function (err) {
 t.track('all');
 
 var logTopTenText = function() {
-  var keyArray = Object.keys(tempObj);
-  var windowArray = _.filter(keyArray, function(num) {
+  keyArray = Object.keys(tempObj);
+  windowArray = _.filter(keyArray, function(num) {
     if (num >= Date.now() - rollingWindowInMs) {
       return num;
     }

@@ -15,7 +15,6 @@ t.on('tweet', function (tweet) {
     var tweetText = tweet.retweeted_status.text;
     var retweetCount = tweet.retweeted_status.retweet_count;
     tempObj[retweetCount] = tweetText;
-    // logTopTen(tempObj);
   }
 });
 

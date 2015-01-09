@@ -6,7 +6,7 @@ var t = new Twitter({
     token_secret: 'elXVYJRFmFFit3PiVTmI9eU0IvHqqD7H4yeEmClJ8c'
   });
 var moment = require('moment');
-var rollingWindowInMin = 5;
+var rollingWindowInMin = 1;
 var tempObj = {};
 var refreshRateInMs = 1000;
 
@@ -35,4 +35,4 @@ var logTopTen = function() {
 };
 
 var logEverySec = setInterval(logTopTen, refreshRateInMs);
-var reset = setTimeout(tempObj = {}, rollingWindowInMin*1000*60);
+var reset = setTimeout(function(){tempObj = {};}, rollingWindowInMin*1000*60);

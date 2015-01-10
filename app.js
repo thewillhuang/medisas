@@ -1,16 +1,12 @@
 var _ = require('lodash');
 var moment = require('moment');
+var config = require('./config.js').config;
 var Twitter = require('node-tweet-stream');
-var t = new Twitter({
-  consumer_key: '8AqQCy7umStCyNN356v7fw',
-  consumer_secret: 'vOvKV1QwuS1AeKPMIvJqErBxW7i1N12OL4UY2tNMs0c',
-  token: '29463499-9Og6hxW4HqFxcQyIrAdmLpbAnrwIk290ghOE0ez5f',
-  token_secret: 'elXVYJRFmFFit3PiVTmI9eU0IvHqqD7H4yeEmClJ8c'
-});
+var t = new Twitter(config);
 
 
 //user defined variables
-var rollingWindowInMin = 20;
+var rollingWindowInMin = 1;
 var refreshRateInMs = 100;
 var rollingWindowInMs = rollingWindowInMin * 1000 * 60;
 

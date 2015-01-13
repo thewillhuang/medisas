@@ -3,11 +3,13 @@ var moment = require('moment');
 var config = require('./config.js').config;
 var Twitter = require('node-tweet-stream');
 var t = new Twitter(config);
+var tempObj = {};
+var keyArray;
+var windowArray;
 
 
 //user defined variables
 var rollingWindowInMin = 1;
-var refreshRateInMs = 100;
 var rollingWindowInMs = rollingWindowInMin * 1000 * 60;
 
 t.on('tweet', function (tweet) {
@@ -19,6 +21,7 @@ t.on('tweet', function (tweet) {
       text: tweetText,
       count: retweetCount
     };
+    logTopTenText();
   }
 });
 
@@ -28,9 +31,6 @@ t.on('error', function (err) {
 
 t.track('all');
 
-var tempObj = {};
-var keyArray;
-var windowArray;
 
 var logTopTenText = function() {
   //resets top10 so it rebuilds on each run of the function
@@ -43,6 +43,8 @@ var logTopTenText = function() {
   windowArray = _.filter(keyArray, function(num) {
     if (num >= Date.now() - rollingWindowInMs) {
       return num;
+    } else {
+      delete tempObj[num];
     }
   });
 
@@ -72,5 +74,3 @@ var logTopTenText = function() {
   console.log(topTen);
   console.log('===========================================', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 };
-
-var logEverySec = setInterval(logTopTenText, refreshRateInMs);
